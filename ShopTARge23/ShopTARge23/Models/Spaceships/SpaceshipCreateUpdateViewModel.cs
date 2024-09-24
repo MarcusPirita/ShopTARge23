@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ShopTARge23.Core.Domain
+﻿namespace ShopTARge23.Models.Spaceships
 {
-    public class Spaceship
+    public class SpaceshipCreateUpdateViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Typename { get; set; }
         public string SpaceshipModel { get; set; }
         public DateTime BuiltDate { get; set; }
-        public int Crew {  get; set; }
+        public int Crew { get; set; }
         public int EnginePower { get; set; }
 
 
