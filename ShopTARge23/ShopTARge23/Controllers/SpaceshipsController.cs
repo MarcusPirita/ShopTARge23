@@ -140,18 +140,18 @@ namespace ShopTARge23.Controllers
                 return View(vm);
             }
 
-            [HttpPost]
+        [HttpPost]
 
-            public async Task<IActionResult> DeleteConformation(Guid id)
+        public async Task<IActionResult> DeleteConformation(Guid id)
             {
-                var spaceship = await _spaceshipServices.Delete(id);
+            var spaceship = await _spaceshipServices.Delete(id);
 
-                if(spaceship == null)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
-
+            if(spaceship == null)
+            {
                 return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
             }
         }
     }
