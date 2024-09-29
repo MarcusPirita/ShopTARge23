@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
 using ShopTARge23.Core.Dto;
 using ShopTARge23.Core.ServiceInterface;
 using ShopTARge23.Data;
@@ -97,8 +96,8 @@ namespace ShopTARge23.Controllers
                 Id = vm.Id,
                 Name = vm.Name,
                 Typename = vm.Typename,
-                BuiltDate = vm.BuiltDate,
                 SpaceshipModel = vm.SpaceshipModel,
+                BuiltDate = vm.BuiltDate,
                 Crew = vm.Crew,
                 EnginePower = vm.EnginePower,
                 CreatedAt = vm.CreatedAt,
@@ -126,24 +125,23 @@ namespace ShopTARge23.Controllers
             }
 
             var vm = new SpaceshipDeleteViewModel();
-            {
-                vm.Id = spaceship.Id;
-                vm.Name = spaceship.Name;
-                vm.Typename = spaceship.Typename;
-                vm.BuiltDate = spaceship.BuiltDate;
-                vm.SpaceshipModel = spaceship.SpaceshipModel;
-                vm.Crew = spaceship.Crew;
-                vm.EnginePower = spaceship.EnginePower;
-                vm.CreatedAt = spaceship.CreatedAt;
-                vm.ModifiedAt = spaceship.ModifiedAt;
 
-                return View(vm);
-            }
+            vm.Id = spaceship.Id;
+            vm.Name = spaceship.Name;
+            vm.Typename = spaceship.Typename;
+            vm.BuiltDate = spaceship.BuiltDate;
+            vm.SpaceshipModel = spaceship.SpaceshipModel;
+            vm.Crew = spaceship.Crew;
+            vm.EnginePower = spaceship.EnginePower;
+            vm.CreatedAt = spaceship.CreatedAt;
+            vm.ModifiedAt = spaceship.ModifiedAt;
+
+            return View(vm);
+        }
 
         [HttpPost]
-
-        public async Task<IActionResult> DeleteConformation(Guid id)
-            {
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
             var spaceship = await _spaceshipServices.Delete(id);
 
             if(spaceship == null)
@@ -152,7 +150,6 @@ namespace ShopTARge23.Controllers
             }
 
             return RedirectToAction(nameof(Index));
-            }
         }
     }
 }

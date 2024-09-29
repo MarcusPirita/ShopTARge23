@@ -32,7 +32,7 @@ namespace ShopTARge23.ApplicationServices.Services
             Spaceship domain = new();
 
             domain.Id = dto.Id;
-            domain.Name = dto.Name; 
+            domain.Name = dto.Name;
             domain.Typename = dto.Typename;
             domain.SpaceshipModel = dto.SpaceshipModel;
             domain.BuiltDate = dto.BuiltDate;
