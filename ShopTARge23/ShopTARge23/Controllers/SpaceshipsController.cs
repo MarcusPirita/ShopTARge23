@@ -50,15 +50,23 @@ namespace ShopTARge23.Controllers
         {
             var dto = new SpaceshipDto()
             {
-                Id=vm.Id,
-                Name=vm.Name,
-                Typename=vm.Typename,
-                SpaceshipModel=vm.SpaceshipModel,
-                BuiltDate=vm.BuiltDate,
-                Crew=vm.Crew,
-                EnginePower=vm.EnginePower,
-                CreatedAt=vm.CreatedAt,
-                ModifiedAt=vm.ModifiedAt,
+                Id = vm.Id,
+                Name = vm.Name,
+                Typename = vm.Typename,
+                SpaceshipModel = vm.SpaceshipModel,
+                BuiltDate = vm.BuiltDate,
+                Crew = vm.Crew,
+                EnginePower = vm.EnginePower,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt,
+                Files = vm.Files,
+                FileToApiDtos = vm.Image
+                    .Select(x => new FileToApiDto
+                    {
+                        Id = x.ImageId,
+                        ExistingFilePath = x.FilePath,
+                        SpaceshipId = x.SpaceshipId
+                    }).ToArray()
             };
 
             var result = await _spaceshipServices.Create(dto);
