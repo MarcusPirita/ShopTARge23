@@ -65,6 +65,7 @@ namespace ShopTARge23.ApplicationServices.Services
             domain.EnginePower = dto.EnginePower;
             domain.CreatedAt = DateTime.Now;
             domain.ModifiedAt = DateTime.Now;
+            _fileServices.FilesToApi(dto, domain);
 
             _context.Spaceships.Update(domain);
             await _context.SaveChangesAsync();
