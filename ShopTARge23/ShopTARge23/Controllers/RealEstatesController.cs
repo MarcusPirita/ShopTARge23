@@ -4,7 +4,6 @@ using ShopTARge23.Core.Dto;
 using ShopTARge23.Core.ServiceInterface;
 using ShopTARge23.Data;
 using ShopTARge23.Models.RealEstates;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ShopTARge23.Controllers
 {
@@ -23,6 +22,7 @@ namespace ShopTARge23.Controllers
         {
             _context = context;
             _realEstateServices = realEstateServices;
+            _fileServices = fileServices;
         }
 
         public IActionResult Index()
@@ -84,6 +84,8 @@ namespace ShopTARge23.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
+            //tuua siia piltide  vaatamise funktsionaalsus
+
             var realEstate = await _realEstateServices.GetAsync(id);
 
             if (realEstate == null)
@@ -111,7 +113,7 @@ namespace ShopTARge23.Controllers
             vm.BuildingType = realEstate.BuildingType;
             vm.CreatedAt = realEstate.CreatedAt;
             vm.ModifiedAt = realEstate.ModifiedAt;
-            vm.Image.AddRange(photos); 
+            vm.Image.AddRange(photos);
 
             return View(vm);
         }
@@ -127,15 +129,15 @@ namespace ShopTARge23.Controllers
             }
 
             var photos = await _context.FileToDatabases
-               .Where(x => x.RealEstateId == id)
-               .Select(y => new RealEstateImageViewModel
-               {
-                   RealEstateId = y.Id,
-                   ImageId = y.Id,
-                   ImageData = y.ImageData,
-                   ImageTitle = y.ImageTitle,
-                   Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
-               }).ToArrayAsync();
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new RealEstateImageViewModel
+                {
+                    RealEstateId = y.Id,
+                    ImageId = y.Id,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
 
             var vm = new RealEstatesCreateUpdateViewModel();
 
@@ -194,15 +196,15 @@ namespace ShopTARge23.Controllers
             }
 
             var photos = await _context.FileToDatabases
-               .Where(x => x.RealEstateId == id)
-               .Select(y => new RealEstateImageViewModel
-               {
-                   RealEstateId = y.Id,
-                   ImageId = y.Id,
-                   ImageData = y.ImageData,
-                   ImageTitle = y.ImageTitle,
-                   Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
-               }).ToArrayAsync();
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new RealEstateImageViewModel
+                {
+                    RealEstateId = y.Id,
+                    ImageId = y.Id,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
 
             var vm = new RealEstatesDeleteViewModel();
 

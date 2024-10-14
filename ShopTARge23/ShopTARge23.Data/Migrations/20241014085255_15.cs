@@ -5,7 +5,7 @@
 namespace ShopTARge23.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class _14 : Migration
+    public partial class _15 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

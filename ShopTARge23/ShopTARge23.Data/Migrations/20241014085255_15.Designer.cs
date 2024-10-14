@@ -12,8 +12,8 @@ using ShopTARge23.Data;
 namespace ShopTARge23.Data.Migrations
 {
     [DbContext(typeof(ShopTARge23Context))]
-    [Migration("20241014062425_14")]
-    partial class _14
+    [Migration("20241014085255_15")]
+    partial class _15
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

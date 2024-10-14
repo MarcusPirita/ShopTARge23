@@ -26,12 +26,12 @@ namespace ShopTARge23.ApplicationServices.Services
 
         public void FilesToApi(SpaceshipDto dto, Spaceship spaceship)
         {
-            if(!Directory.Exists(_webHost.ContentRootPath + "\\multipleFileUpload\\"))
+            if (!Directory.Exists(_webHost.ContentRootPath + "\\multipleFileUpload\\"))
             {
                 Directory.CreateDirectory(_webHost.ContentRootPath + "\\multipleFileUpload\\");
             }
 
-            foreach(var file in dto.Files)
+            foreach (var file in dto.Files)
             {
                 string uploadsFolder = Path.Combine(_webHost.ContentRootPath, "multipleFileUpload");
                 string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
@@ -55,7 +55,7 @@ namespace ShopTARge23.ApplicationServices.Services
 
         public async Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dtos)
         {
-            foreach(var dto in dtos)
+            foreach (var dto in dtos)
             {
                 var imageId = await _context.FileToApis
                     .FirstOrDefaultAsync(x => x.ExistingFilePath == dto.ExistingFilePath);
@@ -109,6 +109,21 @@ namespace ShopTARge23.ApplicationServices.Services
             await _context.SaveChangesAsync();
 
             return image;
+        }
+
+
+        public async Task<FileToDatabase> RemoveImagesFromDatabase(FileToDatabaseDto[] dtos)
+        {
+            foreach(var dto in dtos)
+            {
+                var image = await _context.FileToDatabases
+                    .Where(x => x.Id == dto.Id)
+                    .FirstOrDefaultAsync();
+
+                _context.FileToDatabases.Remove(image);
+                await _context.SaveChangesAsync();
+            }
+            return null;
         }
     }
 }
