@@ -4,6 +4,7 @@ using ShopTARge23.Core.Dto;
 using ShopTARge23.Core.ServiceInterface;
 using ShopTARge23.Data;
 using ShopTARge23.Models.RealEstates;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ShopTARge23.Controllers
 {
@@ -11,11 +12,13 @@ namespace ShopTARge23.Controllers
     {
         private readonly ShopTARge23Context _context;
         private readonly IRealEstateServices _realEstateServices;
+        private readonly IFileServices _fileServices;
 
         public RealEstatesController
             (
                 ShopTARge23Context context,
-                IRealEstateServices realEstateServices
+                IRealEstateServices realEstateServices,
+                IFileServices fileServices
             )
         {
             _context = context;
@@ -123,6 +126,17 @@ namespace ShopTARge23.Controllers
                 return NotFound();
             }
 
+            var photos = await _context.FileToDatabases
+               .Where(x => x.RealEstateId == id)
+               .Select(y => new RealEstateImageViewModel
+               {
+                   RealEstateId = y.Id,
+                   ImageId = y.Id,
+                   ImageData = y.ImageData,
+                   ImageTitle = y.ImageTitle,
+                   Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+               }).ToArrayAsync();
+
             var vm = new RealEstatesCreateUpdateViewModel();
 
             vm.Id = realEstate.Id;
@@ -132,6 +146,7 @@ namespace ShopTARge23.Controllers
             vm.BuildingType = realEstate.BuildingType;
             vm.CreatedAt = realEstate.CreatedAt;
             vm.ModifiedAt = realEstate.ModifiedAt;
+            vm.Image.AddRange(photos);
 
             return View("CreateUpdate", vm);
         }
@@ -147,7 +162,16 @@ namespace ShopTARge23.Controllers
                 RoomNumber = vm.RoomNumber,
                 BuildingType = vm.BuildingType,
                 CreatedAt = vm.CreatedAt,
-                ModifiedAt = vm.ModifiedAt
+                ModifiedAt = vm.ModifiedAt,
+                Files = vm.Files,
+                Image = vm.Image
+                    .Select(x => new FileToDatabaseDto
+                    {
+                        Id = x.ImageId,
+                        ImageData = x.ImageData,
+                        ImageTitle = x.ImageTitle,
+                        RealEstateId = x.RealEstateId,
+                    }).ToArray()
             };
 
             var result = await _realEstateServices.Update(dto);
@@ -169,6 +193,17 @@ namespace ShopTARge23.Controllers
                 return NotFound();
             }
 
+            var photos = await _context.FileToDatabases
+               .Where(x => x.RealEstateId == id)
+               .Select(y => new RealEstateImageViewModel
+               {
+                   RealEstateId = y.Id,
+                   ImageId = y.Id,
+                   ImageData = y.ImageData,
+                   ImageTitle = y.ImageTitle,
+                   Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+               }).ToArrayAsync();
+
             var vm = new RealEstatesDeleteViewModel();
 
             vm.Id = realEstate.Id;
@@ -178,6 +213,7 @@ namespace ShopTARge23.Controllers
             vm.BuildingType = realEstate.BuildingType;
             vm.CreatedAt = realEstate.CreatedAt;
             vm.ModifiedAt = realEstate.ModifiedAt;
+            vm.Image.AddRange(photos);
 
             return View(vm);
         }
@@ -188,6 +224,24 @@ namespace ShopTARge23.Controllers
             var realEstate = await _realEstateServices.Delete(id);
 
             if (realEstate == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(RealEstateImageViewModel vm)
+        {
+            var dto = new FileToDatabaseDto()
+            {
+                Id = vm.ImageId
+            };
+
+            var image = await _fileServices.RemoveImageFromDatabase(dto);
+
+            if (image == null)
             {
                 return RedirectToAction(nameof(Index));
             }
