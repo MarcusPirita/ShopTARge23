@@ -1,6 +1,8 @@
-﻿namespace ShopTARge23.Models.RealEstate
+﻿
+
+namespace ShopTARge23.Models.RealEstates
 {
-    public class RealEstateIndexViewModel
+    public class RealEstatesIndexViewModel
     {
         public Guid? Id { get; set; }
         public double Size { get; set; }

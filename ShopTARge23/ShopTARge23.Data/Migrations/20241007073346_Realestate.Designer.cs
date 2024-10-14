@@ -12,8 +12,8 @@ using ShopTARge23.Data;
 namespace ShopTARge23.Data.Migrations
 {
     [DbContext(typeof(ShopTARge23Context))]
-    [Migration("20241007073342_realestate")]
-    partial class realestate
+    [Migration("20241007073346_Realestate")]
+    partial class Realestate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,7 +45,7 @@ namespace ShopTARge23.Data.Migrations
 
             modelBuilder.Entity("ShopTARge23.Core.Domain.RealEstate", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -71,7 +71,7 @@ namespace ShopTARge23.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RealEstate");
+                    b.ToTable("RealEstates");
                 });
 
             modelBuilder.Entity("ShopTARge23.Core.Domain.Spaceship", b =>

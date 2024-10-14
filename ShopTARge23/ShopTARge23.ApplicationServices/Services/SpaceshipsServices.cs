@@ -3,7 +3,6 @@ using ShopTARge23.Core.Domain;
 using ShopTARge23.Core.Dto;
 using ShopTARge23.Core.ServiceInterface;
 using ShopTARge23.Data;
-using System.Diagnostics;
 
 
 namespace ShopTARge23.ApplicationServices.Services
@@ -31,7 +30,7 @@ namespace ShopTARge23.ApplicationServices.Services
             spaceship.Name = dto.Name;
             spaceship.Typename = dto.Typename;
             spaceship.SpaceshipModel = dto.SpaceshipModel;
-            spaceship.BuiltDate = dto.BuiltDate;    
+            spaceship.BuiltDate = dto.BuiltDate;
             spaceship.Crew = dto.Crew;
             spaceship.EnginePower = dto.EnginePower;
             spaceship.CreatedAt = DateTime.Now;
@@ -64,7 +63,7 @@ namespace ShopTARge23.ApplicationServices.Services
             domain.BuiltDate = dto.BuiltDate;
             domain.Crew = dto.Crew;
             domain.EnginePower = dto.EnginePower;
-            domain.CreatedAt = DateTime.Now;
+            domain.CreatedAt = dto.CreatedAt;
             domain.ModifiedAt = DateTime.Now;
             _fileServices.FilesToApi(dto, domain);
 

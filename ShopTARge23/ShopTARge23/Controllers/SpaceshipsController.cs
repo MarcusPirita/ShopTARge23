@@ -4,7 +4,6 @@ using ShopTARge23.Core.Dto;
 using ShopTARge23.Core.ServiceInterface;
 using ShopTARge23.Data;
 using ShopTARge23.Models.Spaceships;
-using System.Runtime.CompilerServices;
 
 namespace ShopTARge23.Controllers
 {
@@ -212,7 +211,7 @@ namespace ShopTARge23.Controllers
             vm.EnginePower = spaceship.EnginePower;
             vm.CreatedAt = spaceship.CreatedAt;
             vm.ModifiedAt = spaceship.ModifiedAt;
-            vm.ImagesViewModels.AddRange(images);
+            vm.ImageViewModels.AddRange(images);
 
             return View(vm);
         }
@@ -222,7 +221,7 @@ namespace ShopTARge23.Controllers
         {
             var spaceship = await _spaceshipServices.Delete(id);
 
-            if (spaceship == null)
+            if(spaceship == null)
             {
                 return RedirectToAction(nameof(Index));
             }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ShopTARge23.Models.RealEstate.RealEstateIndexViewModel>
+﻿@model IEnumerable<ShopTARge23.Models.RealEstates.RealEstatesIndexViewModel>
 
 
 <div class="h1">
@@ -10,7 +10,7 @@
 }
 
 <div>
-    <a asp-action="create" asp-controller="realestates" type="submit" class="btn btn-primary">Create</a>
+    <a asp-action="create" asp-controller="realestates" class="btn btn-primary">Create</a>
 </div>
 
 <form method="post">
@@ -20,7 +20,8 @@
                 <th scope="col">Nr</th>
                 <th scope="col">Size</th>
                 <th scope="col">Room number</th>
-                <th scope="col">Building Type</th>
+                <th scope="col">Buildingtype</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -33,13 +34,14 @@
                     <td>@realEstate.BuildingType</td>
                     <td>
                         <a asp-action="details" asp-controller="realestates" asp-route-id="@realEstate.Id" class="btn btn-info">Details</a>
-                        <a asp-action="update" asp-controller="realestates" asp-route-id="@realEstate.Id" class="btn btn-primary">Update</a>
-                        <a asp-action="delete" asp-controller="realestates" asp-route-id="@realEstate.Id" class="btn btn-outline-danger">Delete</a>
+                        <a asp-action="update" asp-controller="realestates" asp-route-id="@realEstate.Id" class="btn btn-outline-primary">Update</a>
+                        <a asp-action="delete" asp-controller="realestates" asp-route-id="@realEstate.Id" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>
 
                 rowNumber += 1;
             }
+
         </tbody>
     </table>
 </form>
