@@ -1,7 +1,7 @@
 using ShopTARge23.Core.Dto;
 using ShopTARge23.Core.ServiceInterface;
-using Microsoft.EntityFrameworkCore;
-
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using ShopTARge23.RealEstateTest;
 
 namespace ShopTARge23.RealEstateTest
 {
@@ -33,9 +33,13 @@ namespace ShopTARge23.RealEstateTest
         {
             //Arrange
 
+
             //Act
+
 
             //Assert
 
+
         }
     }
+}
