@@ -13,6 +13,10 @@ namespace ShopTARge23
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+            builder.Services.AddHttpClient();
+
+            builder.Services.AddControllersWithViews();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
