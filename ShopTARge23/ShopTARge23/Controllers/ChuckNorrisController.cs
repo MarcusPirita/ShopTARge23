@@ -18,17 +18,17 @@ namespace ShopTARge23.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(new ChuckNorrisViewModel());
+            return View(new ChuckNorrisSearchViewModel());
         }
 
         [HttpPost]
         public async Task<IActionResult> GetRandomJoke()
         {
             var joke = await FetchRandomJoke();
-            var viewModel = new ChuckNorrisViewModel
+            var viewModel = new ChuckNorrisSearchViewModel
             {
                 JokeText = joke.Value,
-                JokeUrl = joke.Url
+                JokeUrl = joke.Url,
             };
             return View("Index", viewModel);
         }
