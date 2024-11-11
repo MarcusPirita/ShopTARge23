@@ -1,10 +1,10 @@
-﻿namespace ShopTARge23.Core.Dto.WeatherDtos.AccuWeatherDtos
+﻿namespace ShopTARge23.Models.AccuWeathers
 {
-    public class AccuLocationWeatherResultDto
+    public class AccuWeatherViewModel
     {
         public string CityName { get; set; }
-        public string CityCode { get; set; }
-        public int Rank { get; set; }
+        //public string CityCode { get; set; }
+        //public int Rank { get; set; }
 
 
         public string EffectiveDate { get; set; }
@@ -41,6 +41,5 @@
 
         public string MobileLink { get; set; }
         public string Link { get; set; }
-        //iseseisvalt kirjutate siia muutujad
     }
 }
