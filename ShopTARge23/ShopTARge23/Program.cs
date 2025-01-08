@@ -24,6 +24,8 @@ namespace ShopTARge23
             builder.Services.AddScoped<IFileServices, FileServices>();
             builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
             builder.Services.AddScoped<IWeatherForecastServices, WeatherForecastServices>();
+            builder.Services.AddScoped<IOpenWeathersServices, OpenWeathersServices>();
+
 
             builder.Services.AddDbContext<ShopTARge23Context>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
